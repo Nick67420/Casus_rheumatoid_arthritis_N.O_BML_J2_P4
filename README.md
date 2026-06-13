@@ -10,7 +10,4 @@ Om de biologische betekenis van de differentieel tot expressie gebrachte genen t
 
 [Flowchart](figuren_github/flowchart_materiaal_en_methode.png)
 
-git add .
-git commit -m "flowchart zichtbaar gemaakt in readme"
-git push
 
