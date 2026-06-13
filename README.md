@@ -6,4 +6,11 @@ Reumatoïde artritis (RA)  is één van de meest voorkomende auto-immuunziekten 
 # Methode
 Voor deze studie werd gebruik gemaakt van een RNA-sequencing dataset afkomstig van synoviumbiopten van vier patiënten met RA en vier gezonde controles. De RNA-seq data bestond uit paired-end reads. deze werden geanalyseerd met behulp van de programmeertaal R. De ruwe sequencing reads werden gemapt op het humane referentiegenoom (GRCh38.p14) met behulp van de Rsubread package. Vervolgens werden de gemapte reads gesorteerd en geïndexeerd en werd met featureCounts het aantal reads per gen bepaald. De gemaakte count matrix werd gebruikt als input voor een differentiële genexpressieanalyse met behulp van de DESeq2 package. Hierbij werd de genexpressie tussen RA-patiënten en gezonde controles vergeleken en werden genen met een significante verandering in expressie geïdentificeerd.
 Om de biologische betekenis van de differentieel tot expressie gebrachte genen te onderzoeken, werd een GO enrichment analyse uitgevoerd om de betrokken biologische processen te identificeren. Daarnaast werd een KEGG pathway analyse uitgevoerd om de metabole en signaalroutes in kaart te brengen. De resultaten van de KEGG-analyse werden verder gevisualiseerd met behulp van pathview, waarbij veranderingen in genexpressie werden geprojecteerd op relevante pathways. Het volledige analyseproces, inclusief de gebruikte R-scripts en documentatie van de verschillende stappen, is beschikbaar gemaakt via GitHub om de reproduceerbaarheid en transparantie van de analyse te waarborgen.
-## workflow
+## flowchart
+
+[Flowchart](figuren_github/flowchart_materiaal_en_methode.png)
+
+git add .
+git commit -m "flowchart zichtbaar gemaakt in readme"
+git push
+
