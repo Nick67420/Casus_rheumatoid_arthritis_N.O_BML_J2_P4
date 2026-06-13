@@ -10,3 +10,5 @@ Om de biologische betekenis van de differentieel tot expressie gebrachte genen t
 ## flowchart
 
 ![Flowchart](flowchart_materiaal_en_methode.png)
+
+# resultaten
