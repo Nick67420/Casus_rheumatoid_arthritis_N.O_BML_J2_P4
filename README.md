@@ -9,4 +9,4 @@ Voor deze studie werd gebruik gemaakt van een RNA-sequencing dataset afkomstig v
 Om de biologische betekenis van de differentieel tot expressie gebrachte genen te onderzoeken, werd een GO enrichment analyse uitgevoerd om de betrokken biologische processen te identificeren. Daarnaast werd een KEGG pathway analyse uitgevoerd om de metabole en signaalroutes in kaart te brengen. De resultaten van de KEGG-analyse werden verder gevisualiseerd met behulp van pathview, waarbij veranderingen in genexpressie werden geprojecteerd op relevante pathways. Het volledige analyseproces, inclusief de gebruikte R-scripts en documentatie van de verschillende stappen, is beschikbaar gemaakt via GitHub om de reproduceerbaarheid en transparantie van de analyse te waarborgen.
 ## flowchart
 
-flowchart_materiaal_en_methode.png
+![Flowchart](flowchart_materiaal_en_methode.png)
