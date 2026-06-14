@@ -1,0 +1,14 @@
+library(Rsamtools)
+library(Rsubread)
+sortBam(
+  file = "sample.BAM",
+  destination = "sample.sorted")
+  indexBam (file = "sample.sorted.bam")
+
+  featureCounts(
+  files = "sample.sorted.bam",
+  annot.ext = "genomic.gtf",
+  isPairedEnd = TRUE,
+  isGTFAnnotationFile = TRUE,
+  GTF.attrType = "gene_id",
+  useMetaFeatures = TRUE)
