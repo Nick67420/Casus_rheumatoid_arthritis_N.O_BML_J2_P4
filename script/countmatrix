@@ -1,0 +1,3 @@
+counts <- count_matrix$counts
+dim(counts)
+head(counts)
