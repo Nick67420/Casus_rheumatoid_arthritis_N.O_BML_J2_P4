@@ -1,1 +1,373 @@
+setwd("C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/")
+getwd()
 
+BiocManager::install("Rsubread")
+library(Rsubread)
+
+browseVignettes("Rsubread")
+buildindex(
+  basename = "ref_human",
+  reference = "GCF_000001405.40_GRCh38.p14_genomic.fna",
+  memory = 4000,
+  indexSplit = TRUE)
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785819_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785819_2_subset40k.fastq",
+  output_file = "RA1.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785820_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785820_2_subset40k.fastq",
+  output_file = "RA2.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785828_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785828_2_subset40k.fastq",
+  output_file = "RA3.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785831_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785831_2_subset40k.fastq",
+  output_file = "RA4.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785979_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785979_2_subset40k.fastq",
+  output_file = "RA5.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785980_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785980_2_subset40k.fastq",
+  output_file = "RA6.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785986_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785986_2_subset40k.fastq",
+  output_file = "RA7.BAM")
+
+
+align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785988_1_subset40k.fastq",
+  readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785988_2_subset40k.fastq",
+  output_file = "RA8.BAM")
+
+BiocManager::install("Rsamtools")
+library(Rsamtools)
+
+samples <- c(
+  "RA1",
+  "RA2",
+  "RA3",
+  "RA4",
+  "RA5",
+  "RA6",
+  "RA7",
+  "RA8")
+
+lapply(samples, function(s) {
+  sortBam(
+    file = paste0(s, ".BAM"),
+    destination = paste0(s, ".sorted"))})
+
+lapply(samples, function(s) {
+  indexBam(
+    file = paste0(s, ".sorted.bam"))})
+bam_files <- c(
+  "RA1.sorted.bam",
+  "RA2.sorted.bam",
+  "RA3.sorted.bam",
+  "RA4.sorted.bam",
+  "RA5.sorted.bam",
+  "RA6.sorted.bam",
+  "RA7.sorted.bam",
+  "RA8.sorted.bam")
+
+count_matrix <- featureCounts(
+  files = bam_files,
+  annot.ext = "genomic.gtf",
+  isPairedEnd = TRUE,
+  isGTFAnnotationFile = TRUE,
+  GTF.attrType = "gene_id",
+  useMetaFeatures = TRUE)
+counts <- count_matrix$counts
+
+dim(counts)
+
+colnames(counts) <- c(
+  "RA1_sorted",
+  "RA2_sorted",
+  "RA3_sorted",
+  "RA4_sorted",
+  "RA5_sorted",
+  "RA6_sorted",
+  "RA7_sorted",
+  "RA8_sorted")
+
+head(counts)
+BiocManager::install("DESeq2")
+BiocManager::install("EnhancedVolcano")
+
+library(DESeq2)
+library(EnhancedVolcano)
+
+treatment <- c(
+  "Normal", "Normal", "Normal", "Normal",
+  "RA", "RA", "RA", "RA")
+
+treatment_table <- data.frame(treatment)
+
+rownames(treatment_table) <- colnames(counts)
+
+treatment_table
+
+dds <- DESeqDataSetFromMatrix(
+  countData = counts,
+  colData = treatment_table,
+  design = ~ treatment)
+
+dds <- DESeq(dds)
+
+resultaten <- results(dds)
+
+write.csv(
+  as.data.frame(resultaten),
+  "DESeq2_resultaten.csv")
+
+head(resultaten)
+
+upregulated_genes <- sum(
+  resultaten$padj < 0.05 &
+    resultaten$log2FoldChange > 1,
+  na.rm = TRUE)
+
+downregulated_genes <- sum(
+  resultaten$padj < 0.05 &
+    resultaten$log2FoldChange < -1,
+  na.rm = TRUE)
+
+upregulated_genes
+downregulated_genes
+
+
+resultaten_gesorteerd <- resultaten[
+  order(resultaten$padj),]
+
+head(resultaten_gesorteerd, 20)
+
+EnhancedVolcano(
+  resultaten,
+  lab = rownames(resultaten),
+  selectLab = c(
+    "CXCL8",
+    "MMP9",
+    "CCL2",
+    "BAX"
+  ),
+  x = "log2FoldChange",
+  y = "padj",
+  pCutoff = 0.05,
+  FCcutoff = 1,
+  xlim = c(-12, 12),
+  drawConnectors = TRUE,
+  widthConnectors = 0.5,
+  colConnectors = "grey50",
+  title = "Differentiële expressie RA vs Normal",
+  subtitle = "DESeq2 analyse van synoviumbiopten",
+  legendLabels = c(
+    "NS",
+    "Log2FC",
+    "p-waarde",
+    "beide"),
+  colAlpha = 0.6)
+
+sig_genes <- resultaten[
+  !is.na(resultaten$padj) &
+    resultaten$padj < 0.05,]
+nrow(sig_genes)
+head(rownames(sig_genes))
+
+head(rownames(resultaten))
+
+
+dev.copy(
+  png,
+  "Volcanoplot_RA.png",
+  width = 8,
+  height = 10,
+  units = "in",
+  res = 500)
+
+dev.off()
+
+sig_genes <- resultaten[
+  !is.na(resultaten$padj) &
+    resultaten$padj < 0.05,]
+
+nrow(sig_genes)
+
+head(rownames(sig_genes))
+
+BiocManager::install("clusterProfiler")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("enrichplot")
+
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+
+sig_genes <- resultaten[
+  !is.na(resultaten$padj) &
+    resultaten$padj < 0.05,]
+
+gene_symbols <- rownames(sig_genes)
+
+head(gene_symbols)
+
+entrez <- bitr(
+  gene_symbols,
+  fromType = "SYMBOL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db)
+
+head(entrez)
+
+kegg <- enrichKEGG(
+  gene = entrez$ENTREZID,
+  organism = "hsa",
+  pvalueCutoff = 0.05)
+
+head(kegg)
+
+dotplot(
+  kegg,
+  showCategory = 15)
+
+
+kegg_df <- as.data.frame(kegg)
+
+head(
+  kegg_df[, c("Description", "p.adjust", "Count")],
+  15)
+
+
+go_bp <- enrichGO(
+  gene = entrez$ENTREZID,
+  OrgDb = org.Hs.eg.db,
+  keyType = "ENTREZID",
+  ont = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.05,
+  qvalueCutoff = 0.05,
+  readable = TRUE)
+
+head(as.data.frame(go_bp))
+
+go_df <- as.data.frame(go_bp)
+
+head(
+  go_df[order(go_df$p.adjust), ],
+  20)
+
+barplot(
+  go_bp,
+  showCategory = 15)
+
+dotplot(
+  go_bp,
+  showCategory = 15)
+
+write.csv(
+  go_df,
+  "GO_BP_resultaten.csv",
+  row.names = FALSE)
+
+BiocManager::install("pathview")
+install.packages("png")
+
+library(pathview)
+library(png)
+library(grid)
+
+gene_fc <- resultaten$log2FoldChange
+
+names(gene_fc) <- rownames(resultaten)
+
+gene_df <- bitr(
+  rownames(resultaten),
+  fromType = "SYMBOL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db)
+
+gene_df$logFC <- resultaten$log2FoldChange[
+  match(
+    gene_df$SYMBOL,
+    rownames(resultaten))]
+
+fc_vector <- gene_df$logFC
+
+names(fc_vector) <- gene_df$ENTREZID
+
+kegg_df <- as.data.frame(kegg)
+
+head(
+  kegg_df[, c("Description", "p.adjust", "Co
+top_pathways <- kegg_df$ID[1:5]  15)
+
+for (pid in top_pathways) {
+  pathview(
+    gene.data = fc_vector,
+    pathway.id = gsub("hsa", "", pid),
+    species = "hsa",
+    gene.idtype = "entrez")}
+unt")],
+
+pathview(
+  gene.data = fc_vector,
+  pathway.id = "05323",
+  species = "hsa",
+  gene.idtype = "entrez")
+
+img <- readPNG("hsa05323.pathview.png")
+
+grid.raster(img)
+
+img <- readPNG("hsa04657.pathview.png")
+
+grid.raster(img)
+
+img <- readPNG("hsa04668.pathview.png")
+
+grid.raster(img)
+
+
+up_genes <- rownames(
+  resultaten[
+    !is.na(resultaten$padj) &
+      !is.na(resultaten$log2FoldChange) &
+      resultaten$padj < 0.05 &
+      resultaten$log2FoldChange > 1, ])
+
+
+down_genes <- rownames(
+  resultaten[
+    !is.na(resultaten$padj) &
+      !is.na(resultaten$log2FoldChange) &
+      resultaten$padj < 0.05 & 
+      resultaten$log2FoldChange < -1,])
+
+length(up_genes)
+length(down_genes)
