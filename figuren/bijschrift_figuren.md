@@ -18,6 +18,6 @@ De KEGG dotplot toont de resultaten van de KEGG pathway-verrijkingsanalyse op ba
 
 De weergegeven pathway toont de resultaten van de Pathview-analyse van de KEGG Rheumatoid Arthritis pathway (hsa05323). Het doel van deze analyse was om de differentieel geëxprimeerde genen te plaatsen binnen bekende biologische mechanismen die betrokken zijn bij de pathogenese van reumatoïde artritis. Rode vakken vertegenwoordigen genen met een verhoogde expressie in RA-patiënten ten opzichte van gezonde controles, terwijl groene vakken genen met een verlaagde expressie aangeven. Binnen deze pathway werden verhoogde expressieniveaus waargenomen voor verschillende ontstekingsmediatoren, waaronder TNF, IL1B, IL6, CXCL8 (IL8) en CCL2. Daarnaast waren genen betrokken bij T-celactivatie, macrofaagactivatie en de vorming van osteoclasten differentieel geëxpimeerd. Deze processen dragen bij aan chronische ontsteking, immuuncelrekrutering, synoviale proliferatie en botafbraak, kenmerken die typerend zijn voor reumatoïde artritis. De resultaten bevestigen dat de gevonden genexpressieveranderingen aansluiten bij reeds bekende moleculaire mechanismen van de ziekte.
 
-## figuur 4. GO dotplot
+## figuur 4. GO dotplot 
 
 [GO dotplot](figuren/GO
