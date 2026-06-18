@@ -30,10 +30,12 @@ De IL-17-signaalroute werd gevisualiseerd met behulp van Pathview op basis van d
 
 ## Figuur 6. GO Biological Process barplot
 ![barplot GO](figuren/barplot GO analyse.png)
+
 De Gene Ontology (GO) Biological Process barplot toont de vijftien meest significant verrijkte biologische processen onder de differentieel geëxprimeerde genen tussen RA-patiënten en gezonde controles. De lengte van de balken geeft het aantal genen weer dat betrokken is bij elk biologisch proces (Count), terwijl de kleur de statistische significantie (aangepaste p-waarde) weergeeft. De meest verrijkte processen waren gerelateerd aan de adaptieve en aangeboren immuunrespons, waaronder B-celgemedieerde immuniteit, immunoglobuline-gemedieerde immuunrespons, lymfocytactivatie, antigeenreceptor-gemedieerde signalering en NF-κB-signaaltransductie. Daarnaast werden processen zoals mononucleaire celdifferentiatie, patroonherkenningsreceptor-signalering en autofagie verrijkt gevonden. Deze resultaten bevestigen dat de differentieel geëxprimeerde genen voornamelijk betrokken zijn bij immuun- en ontstekingsprocessen die een belangrijke rol spelen in de pathogenese van reumatoïde artritis.
 
 ## Figuur 7. TNF signaling pathway
 ![TNF signaling pathway](figuren/pathway_TNF_signaling.png)
+
 De TNF-signaalroute werd gevisualiseerd met behulp van Pathview op basis van de differentiële genexpressieresultaten van RA-patiënten ten opzichte van gezonde controles. Rood gekleurde genen zijn verhoogd tot expressie, terwijl groen gekleurde genen verlaagd tot expressie zijn in de RA-groep. Binnen deze pathway werden meerdere genen gevonden die betrokken zijn bij ontstekingsreacties, cytokineproductie, immuuncelactivatie en weefselafbraak. Daarnaast waren componenten van de NF-κB- en MAPK-signaalroutes differentieel geëxprimeerd, wat wijst op een verhoogde activatie van pro-inflammatoire signaaltransductie. De verhoogde expressie van verschillende cytokinen, chemokinen en adhesiemoleculen ondersteunt de aanwezigheid van een actieve ontstekingsrespons in het synovium van RA-patiënten. Deze bevindingen komen overeen met de KEGG-verrijkingsanalyse en bevestigen de belangrijke rol van TNF-gemedieerde signalering bij de pathogenese van reumatoïde artritis.
 
 
