@@ -1,9 +1,9 @@
 
-BiocManager::install("clusterProfiler")
+BiocManager::install("clusterProfiler")  4.20.0 | https://bioconductor.org/packages/clusterProfiler
 BiocManager::install("org.Hs.eg.db")
 BiocManager::install("enrichplot")  1.32.0 | https://bioconductor.org/packages/enrichplot
 
-library(clusterProfiler)
+library(clusterProfiler)  4.20.0 | https://bioconductor.org/packages/clusterProfiler
 library(org.Hs.eg.db)
 library(enrichplot)  1.32.0 | https://bioconductor.org/packages/enrichplot
  
