@@ -1,4 +1,4 @@
-library(Rsamtools)
+library(Rsamtools) 2.28.0 | https://bioconductor.org/packages/Rsamtools 
 library(Rsubread) 2.26.0 | https://bioconductor.org/packages/Rsubread 
 sortBam(
   file = "sample.BAM",
