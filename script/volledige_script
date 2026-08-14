@@ -1,91 +1,131 @@
-setwd("C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/")
-getwd()
+# ============================================================
+# 1. Rsubread installeren en laden
+# Doel: Rsubread bevat functies voor het maken van een
+# referentie-index, het mappen van RNA-seq reads en het tellen
+# van reads per gen.
+# ============================================================
 
-BiocManager::install("Rsubread")
+BiocManager::install('Rsubread')
 library(Rsubread)
 
-browseVignettes("Rsubread")
+# Bekijk de beschikbare documentatie en voorbeelden van Rsubread.
+browseVignettes('Rsubread')
+
+
+# ============================================================
+# 2. Referentiegenoom indexeren
+# Doel: een index maken van het humane referentiegenoom.
+# Deze index wordt later gebruikt om de RNA-seq reads tegen
+# het referentiegenoom te mappen.
+#
+# Bijzonderheid: het FASTA-bestand moet het gekozen
+# referentiegenoom bevatten.
+# ============================================================
+
 buildindex(
-  basename = "ref_human",
-  reference = "GCF_000001405.40_GRCh38.p14_genomic.fna",
+  basename = 'ref_human',
+  reference = 'GCF_000001405.40_GRCh38.p14_genomic.fna',
   memory = 4000,
-  indexSplit = TRUE)
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+  indexSplit = TRUE
+)
+
+
+# ============================================================
+# 3. RNA-seq reads mappen op het referentiegenoom
+# Doel: bepalen waar de sequencing reads in het humane genoom
+# vandaan komen.
+#
+# De data zijn paired-end, daarom worden readfile1 en readfile2
+# samen gebruikt. Voor iedere sample wordt een BAM-bestand
+# aangemaakt met de gemapte reads.
+# ============================================================
+
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785819_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785819_2_subset40k.fastq",
-  output_file = "RA1.BAM")
+  output_file = "RA1.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785820_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785820_2_subset40k.fastq",
-  output_file = "RA2.BAM")
+  output_file = "RA2.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785828_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785828_2_subset40k.fastq",
-  output_file = "RA3.BAM")
+  output_file = "RA3.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785831_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785831_2_subset40k.fastq",
-  output_file = "RA4.BAM")
+  output_file = "RA4.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785979_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785979_2_subset40k.fastq",
-  output_file = "RA5.BAM")
+  output_file = "RA5.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785980_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785980_2_subset40k.fastq",
-  output_file = "RA6.BAM")
+  output_file = "RA6.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785986_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785986_2_subset40k.fastq",
-  output_file = "RA7.BAM")
+  output_file = "RA7.BAM"
+)
 
-
-align(
-  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human",
+align.eth1 <- align(
+  index = "C:/Users/nicko/OneDrive - NHL Stenden/J2P3/programeren in R/NCBI_humaan_genoom/ncbi_dataset/data/GCF_000001405.40/ref_human", 
   readfile1 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785988_1_subset40k.fastq",
   readfile2 = "NCBI_humaan_genoom/Data_RA_raw/SRR4785988_2_subset40k.fastq",
-  output_file = "RA8.BAM")
+  output_file = "RA8.BAM"
+)
 
-BiocManager::install("Rsamtools")
+
+# ============================================================
+# 4. BAM-bestanden sorteren en indexeren
+# Doel: de gemapte BAM-bestanden voorbereiden voor verdere
+# analyse. Sorteren ordent de reads op positie in het genoom.
+# Indexeren maakt het mogelijk om efficiënt specifieke delen
+# van de BAM-bestanden te benaderen.
+# ============================================================
+
+BiocManager::install('Rsamtools')
 library(Rsamtools)
-
-samples <- c(
-  "RA1",
-  "RA2",
-  "RA3",
-  "RA4",
-  "RA5",
-  "RA6",
-  "RA7",
-  "RA8")
 
 lapply(samples, function(s) {
   sortBam(
     file = paste0(s, ".BAM"),
-    destination = paste0(s, ".sorted"))})
+    destination = paste0(s, ".sorted")
+  )
+})
 
 lapply(samples, function(s) {
-  indexBam(
-    file = paste0(s, ".sorted.bam"))})
+  indexBam(file = paste0(s, '.sorted.bam'))
+})
+
+
+# ============================================================
+# 5. BAM-bestanden selecteren voor featureCounts
+# Doel: aangeven welke gesorteerde BAM-bestanden gebruikt worden
+# om het aantal reads per gen te bepalen.
+# ============================================================
+
 bam_files <- c(
   "RA1.sorted.bam",
   "RA2.sorted.bam",
@@ -94,7 +134,19 @@ bam_files <- c(
   "RA5.sorted.bam",
   "RA6.sorted.bam",
   "RA7.sorted.bam",
-  "RA8.sorted.bam")
+  "RA8.sorted.bam"
+)
+
+
+# ============================================================
+# 6. Reads per gen tellen
+# Doel: bepalen hoeveel sequencing reads aan ieder gen gekoppeld
+# kunnen worden. Dit vormt de countmatrix die als input wordt
+# gebruikt voor de differentiële genexpressieanalyse.
+#
+# Bijzonderheid: de GTF-file bevat de annotatie van de genen.
+# Omdat de data paired-end zijn, wordt isPairedEnd = TRUE gebruikt.
+# ============================================================
 
 count_matrix <- featureCounts(
   files = bam_files,
@@ -102,9 +154,23 @@ count_matrix <- featureCounts(
   isPairedEnd = TRUE,
   isGTFAnnotationFile = TRUE,
   GTF.attrType = "gene_id",
-  useMetaFeatures = TRUE)
-counts <- count_matrix$counts
+  useMetaFeatures = TRUE
+)
 
+
+# ============================================================
+# 7. Countmatrix controleren en voorbereiden
+# Doel: controleren of de countdata correct zijn ingelezen en
+# de matrix geschikt maken voor DESeq2.
+# ============================================================
+
+counts <- read.table("count_matrix_RA.txt")
+str(count_matrix)
+
+counts <- "count_matrix_RA.txt"
+head(counts)
+
+counts <- count_matrix$counts
 dim(counts)
 
 colnames(counts) <- c(
@@ -115,68 +181,190 @@ colnames(counts) <- c(
   "RA5_sorted",
   "RA6_sorted",
   "RA7_sorted",
-  "RA8_sorted")
+  "RA8_sorted"
+)
 
 head(counts)
+
+read.table("count_matrix_RA.txt")
+
+counts <- count_matrix$counts
+head(counts)
+
+counts <- read.table("count_matrix_RA.txt", row.names = 1)
+
+
+# ============================================================
+# 8. Packages voor differentiële expressie en visualisatie
+# Doel: benodigde packages installeren en laden voor DESeq2,
+# KEGG/pathway-analyse en visualisatie.
+# ============================================================
+
 BiocManager::install("DESeq2")
+BiocManager::install("KEGGREST")
 BiocManager::install("EnhancedVolcano")
+BiocManager::install("pathview")
 
 library(DESeq2)
+library(KEGGREST)
 library(EnhancedVolcano)
+library(pathview)
+
+
+# ============================================================
+# 9. Experimentele groepen definiëren
+# Doel: aangeven welke samples tot de controlegroep en welke
+# samples tot de RA-groep behoren.
+#
+# De namen in treatment_table moeten exact overeenkomen met
+# de kolomnamen van de countmatrix.
+# ============================================================
 
 treatment <- c(
   "Normal", "Normal", "Normal", "Normal",
-  "RA", "RA", "RA", "RA")
+  "RA", "RA", "RA", "RA"
+)
 
 treatment_table <- data.frame(treatment)
 
+rownames(treatment_table) <- c(
+  "RA1_sorted",
+  "RA2_sorted",
+  "RA3_sorted",
+  "RA4_sorted",
+  "RA5_sorted",
+  "RA6_sorted",
+  "RA7_sorted",
+  "RA8_sorted"
+)
+
 rownames(treatment_table) <- colnames(counts)
 
-treatment_table
+
+# ============================================================
+# 10. DESeq2-dataset maken
+# Doel: de countmatrix en experimentele informatie combineren
+# tot een DESeqDataSet.
+#
+# Het design bepaalt dat de behandeling/groep wordt gebruikt
+# om verschillen in genexpressie te onderzoeken.
+# ============================================================
 
 dds <- DESeqDataSetFromMatrix(
   countData = counts,
   colData = treatment_table,
-  design = ~ treatment)
+  design = ~ treatment
+)
+
+
+# ============================================================
+# 11. Differentiële genexpressieanalyse uitvoeren
+# Doel: bepalen welke genen significant verschillend tot
+# expressie komen tussen RA en Normal.
+#
+# DESeq() voert de statistische analyse uit.
+# results() haalt vervolgens de resultaten op, waaronder
+# log2FoldChange, p-waarde en aangepaste p-waarde.
+# ============================================================
 
 dds <- DESeq(dds)
 
 resultaten <- results(dds)
 
-write.csv(
-  as.data.frame(resultaten),
-  "DESeq2_resultaten.csv")
+write.table(
+  resultaten,
+  file = 'ResultatenWC3.csv',
+  row.names = TRUE,
+  col.names = TRUE
+)
 
 head(resultaten)
 
-upregulated_genes <- sum(
+
+# ============================================================
+# 12. Aantal significant op- en neerwaarts gereguleerde genen
+# Doel: bepalen hoeveel genen significant verhoogd of verlaagd
+# zijn in de RA-groep.
+#
+# Hier wordt een aangepaste p-waarde < 0.05 gecombineerd met
+# een absolute log2 fold change groter dan 1.
+# ============================================================
+
+sum(
   resultaten$padj < 0.05 &
     resultaten$log2FoldChange > 1,
-  na.rm = TRUE)
+  na.rm = TRUE
+)
 
-downregulated_genes <- sum(
+sum(
   resultaten$padj < 0.05 &
     resultaten$log2FoldChange < -1,
-  na.rm = TRUE)
-
-upregulated_genes
-downregulated_genes
+  na.rm = TRUE
+)
 
 
-resultaten_gesorteerd <- resultaten[
-  order(resultaten$padj),]
+# ============================================================
+# 13. Resultaten sorteren
+# Doel: de genen rangschikken op basis van log2 fold change
+# of aangepaste p-waarde om de meest veranderde en meest
+# significante genen te kunnen bekijken.
+# ============================================================
 
-head(resultaten_gesorteerd, 20)
+hoogste_fold_change <- resultaten[
+  order(resultaten$log2FoldChange, decreasing = TRUE),
+]
+
+laagste_fold_change <- resultaten[
+  order(resultaten$log2FoldChange, decreasing = FALSE),
+]
+
+laagste_p_waarde <- resultaten[
+  order(resultaten$padj, decreasing = FALSE),
+]
+
+
+# ============================================================
+# 14. Volcano plot maken
+# Doel: de differentiële genexpressieresultaten visueel
+# weergeven. De x-as toont de log2 fold change en de y-as
+# de aangepaste p-waarde.
+# ============================================================
 
 EnhancedVolcano(
   resultaten,
   lab = rownames(resultaten),
-  selectLab = c(
-    "CXCL8",
-    "MMP9",
-    "CCL2",
-    "BAX"
-  ),
+  x = 'log2FoldChange',
+  y = 'padj'
+)
+
+
+# ============================================================
+# 15. Volcano plot opslaan
+# Doel: de gemaakte volcano plot als PNG-bestand opslaan.
+# ============================================================
+
+dev.copy(
+  png,
+  'VolcanoplotWC.png',
+  width = 8,
+  height = 10,
+  units = 'in',
+  res = 500
+)
+
+dev.off()
+
+
+# ============================================================
+# 16. Volcano plot aanpassen
+# Doel: specifieke interessante genen labelen en de
+# significantie- en fold-changegrenzen instellen.
+# ============================================================
+
+EnhancedVolcano(
+  resultaten,
+  lab = rownames(resultaten),
+  selectLab = c("CXCL8", "MMP9", "CCL2", "BAX"),
   x = "log2FoldChange",
   y = "padj",
   pCutoff = 0.05,
@@ -191,35 +379,72 @@ EnhancedVolcano(
     "NS",
     "Log2FC",
     "p-waarde",
-    "beide"),
-  colAlpha = 0.6)
+    "beide"
+  ),
+  colAlpha = 0.6
+)
+
+
+# ============================================================
+# 17. Belangrijkste differentieel geëxprimeerde genen bekijken
+# Doel: de resultaten sorteren op aangepaste p-waarde en de
+# meest significante genen bekijken.
+# ============================================================
+
+resultaten_gesorteerd <- resultaten[
+  order(resultaten$padj)
+]
+
+head(resultaten_gesorteerd, 20)
+
+selectLab = c("CXCL8", "MMP9", "CCL2", "BAX")
+
+drawConnectors = TRUE
+widthConnectors = 0.5
+colConnectors = "grey50"
+
+pCutoff = 0.05
+FCcutoff = 1
+
+xlim = c(-12, 12)
+
+title = "Differentiële expressie RA vs Normal"
+subtitle = "DESeq2 analyse van synoviumbiopten"
+
+legendLabels = c(
+  "NS",
+  "Log2FC",
+  "p-waarde",
+  "beide"
+)
+
+colAlpha = 0.6
+
+
+# ============================================================
+# 18. Significante genen selecteren
+# Doel: alleen genen behouden met een aangepaste p-waarde
+# kleiner dan 0.05. Deze genen worden gebruikt voor de
+# enrichment-analyses.
+# ============================================================
 
 sig_genes <- resultaten[
   !is.na(resultaten$padj) &
-    resultaten$padj < 0.05,]
-nrow(sig_genes)
-head(rownames(sig_genes))
+    resultaten$padj < 0.05,
+]
 
+nrow(sig_genes)
+
+head(rownames(sig_genes))
 head(rownames(resultaten))
 
 
-dev.copy(
-  png,
-  "Volcanoplot_RA.png",
-  width = 8,
-  height = 10,
-  units = "in",
-  res = 500)
-
-dev.off()
-
-sig_genes <- resultaten[
-  !is.na(resultaten$padj) &
-    resultaten$padj < 0.05,]
-
-nrow(sig_genes)
-
-head(rownames(sig_genes))
+# ============================================================
+# 19. Packages voor GO- en KEGG-enrichment installeren en laden
+# Doel: clusterProfiler gebruiken voor functionele enrichment-
+# analyses en org.Hs.eg.db gebruiken voor de annotatie van
+# humane genen.
+# ============================================================
 
 BiocManager::install("clusterProfiler")
 BiocManager::install("org.Hs.eg.db")
@@ -229,40 +454,86 @@ library(clusterProfiler)
 library(org.Hs.eg.db)
 library(enrichplot)
 
-sig_genes <- resultaten[
-  !is.na(resultaten$padj) &
-    resultaten$padj < 0.05,]
+
+# ============================================================
+# 20. Gen-symbolen omzetten naar Entrez-ID's
+# Doel: de gen-symbolen omzetten naar Entrez-ID's, omdat deze
+# ID's nodig zijn voor de KEGG-enrichmentanalyse.
+# ============================================================
 
 gene_symbols <- rownames(sig_genes)
-
-head(gene_symbols)
 
 entrez <- bitr(
   gene_symbols,
   fromType = "SYMBOL",
   toType = "ENTREZID",
-  OrgDb = org.Hs.eg.db)
+  OrgDb = org.Hs.eg.db
+)
 
 head(entrez)
+
+
+# ============================================================
+# 21. KEGG-enrichmentanalyse
+# Doel: bepalen welke KEGG-signaalroutes statistisch verrijkt
+# zijn binnen de geselecteerde genen.
+# ============================================================
 
 kegg <- enrichKEGG(
   gene = entrez$ENTREZID,
   organism = "hsa",
-  pvalueCutoff = 0.05)
+  pvalueCutoff = 0.05
+)
 
 head(kegg)
 
-dotplot(
-  kegg,
-  showCategory = 15)
+
+# ============================================================
+# 22. KEGG-resultaten visualiseren
+# Doel: de belangrijkste verrijkte KEGG-pathways overzichtelijk
+# weergeven met een dotplot.
+# ============================================================
+
+dotplot(kegg)
 
 
-kegg_df <- as.data.frame(kegg)
+# ============================================================
+# 23. Meest interessante KEGG-pathways bekijken
+# Doel: de KEGG-resultaten omzetten naar een dataframe zodat
+# pathways kunnen worden gerangschikt en geselecteerd.
+# ============================================================
 
-head(
-  kegg_df[, c("Description", "p.adjust", "Count")],
-  15)
+kegg <- enrichKEGG(
+  gene = entrez$ENTREZID,
+  organism = "hsa",
+  pvalueCutoff = 0.05
+)
 
+as.data.frame(kegg)[1:20, ]
+
+
+# ============================================================
+# 24. GO-analyse: significante genen selecteren
+# Doel: een strengere selectie maken van genen die zowel
+# statistisch significant zijn als een relevante verandering
+# in expressie hebben.
+# ============================================================
+
+sig <- resultaten[
+  which(
+    resultaten$padj < 0.05 &
+      abs(resultaten$log2FoldChange) > 1
+  ),
+]
+
+genes <- rownames(sig)
+
+
+# ============================================================
+# 25. Gene Ontology enrichmentanalyse
+# Doel: onderzoeken welke biologische processen (Biological
+# Process) oververtegenwoordigd zijn in de geselecteerde genen.
+# ============================================================
 
 go_bp <- enrichGO(
   gene = entrez$ENTREZID,
@@ -272,102 +543,252 @@ go_bp <- enrichGO(
   pAdjustMethod = "BH",
   pvalueCutoff = 0.05,
   qvalueCutoff = 0.05,
-  readable = TRUE)
+  readable = TRUE
+)
 
 head(as.data.frame(go_bp))
 
+
+# ============================================================
+# 26. GO-resultaten bekijken en visualiseren
+# Doel: de GO-resultaten controleren en de belangrijkste
+# biologische processen visueel weergeven.
+# ============================================================
+
 go_df <- as.data.frame(go_bp)
 
-head(
-  go_df[order(go_df$p.adjust), ],
-  20)
+dim(go_df)
+head(go_df, 20)
 
-barplot(
-  go_bp,
-  showCategory = 15)
+barplot(go_bp, showCategory = 15)
+dotplot(go_bp, showCategory = 15)
 
-dotplot(
-  go_bp,
-  showCategory = 15)
+
+# ============================================================
+# 27. GO-resultaten opslaan
+# Doel: de resultaten van de GO-analyse opslaan als CSV-bestand
+# zodat deze verder kunnen worden gebruikt en gerapporteerd.
+# ============================================================
 
 write.csv(
-  go_df,
-  "GO_BP_resultaten.csv",
-  row.names = FALSE)
+  as.data.frame(go_bp),
+  "GO_BP_results.csv",
+  row.names = FALSE
+)
 
-BiocManager::install("pathview")
-install.packages("png")
+
+# ============================================================
+# 28. Belangrijkste GO-processen selecteren
+# Doel: de 20 meest significante biologische processen
+# selecteren op basis van de aangepaste p-waarde.
+# ============================================================
+
+go_df <- as.data.frame(go_bp)
+
+go_df[
+  order(go_df$p.adjust),
+][1:20, ]
+
+
+# ============================================================
+# 29. Genexpressieveranderingen voorbereiden voor Pathview
+# Doel: een vector maken met de log2 fold changes van de genen,
+# zodat deze later op KEGG-pathways kunnen worden geprojecteerd.
+# ============================================================
 
 library(pathview)
-library(png)
-library(grid)
 
 gene_fc <- resultaten$log2FoldChange
-
 names(gene_fc) <- rownames(resultaten)
+
+
+# ============================================================
+# 30. Gen-symbolen opnieuw omzetten naar Entrez-ID's
+# Doel: de genen koppelen aan Entrez-ID's die door Pathview
+# gebruikt kunnen worden.
+# ============================================================
 
 gene_df <- bitr(
   rownames(resultaten),
   fromType = "SYMBOL",
   toType = "ENTREZID",
-  OrgDb = org.Hs.eg.db)
+  OrgDb = org.Hs.eg.db
+)
+
+
+# ============================================================
+# 31. Log2 fold changes koppelen aan Entrez-ID's
+# Doel: voor ieder Entrez-ID de bijbehorende verandering in
+# genexpressie vastleggen.
+# ============================================================
 
 gene_df$logFC <- resultaten$log2FoldChange[
   match(
     gene_df$SYMBOL,
-    rownames(resultaten))]
+    rownames(resultaten)
+  )
+]
+
+
+# ============================================================
+# 32. Vector voor Pathview maken
+# Doel: de log2 fold changes in het juiste formaat zetten
+# voor de pathwayvisualisatie.
+# ============================================================
 
 fc_vector <- gene_df$logFC
-
 names(fc_vector) <- gene_df$ENTREZID
+
+
+# ============================================================
+# 33. Interessante KEGG-pathways selecteren
+# Doel: de KEGG-resultaten bekijken en de meest interessante
+# pathways selecteren voor verdere visualisatie.
+# ============================================================
 
 kegg_df <- as.data.frame(kegg)
 
 head(
-  kegg_df[, c("Description", "p.adjust", "Co
-top_pathways <- kegg_df$ID[1:5]  15)
+  kegg_df[
+    ,
+    c("Description", "p.adjust", "Count")
+  ],
+  15
+)
 
-for (pid in top_pathways) {
+
+# ============================================================
+# 34. Top 5 KEGG-pathways visualiseren met Pathview
+# Doel: de vijf geselecteerde KEGG-pathways visualiseren en
+# de veranderingen in genexpressie op de pathway weergeven.
+# ============================================================
+
+kegg_df <- as.data.frame(kegg)
+
+top_pathways <- kegg_df$ID[1:5]
+
+for(pid in top_pathways) {
   pathview(
     gene.data = fc_vector,
     pathway.id = gsub("hsa", "", pid),
     species = "hsa",
-    gene.idtype = "entrez")}
-unt")],
+    gene.idtype = "entrez"
+  )
+}
+
+
+# ============================================================
+# 35. Rheumatoid arthritis pathway visualiseren
+# Doel: de KEGG-pathway voor reumatoïde artritis specifiek
+# visualiseren omdat deze relevant is voor het onderzoek.
+# ============================================================
 
 pathview(
   gene.data = fc_vector,
-  pathway.id = "05323",
+  pathway.id = "hsa05323",
   species = "hsa",
-  gene.idtype = "entrez")
+  gene.idtype = "entrez"
+)
+
+
+# ============================================================
+# 36. Pathview-afbeelding in R weergeven
+# Doel: de gegenereerde pathway-afbeelding in RStudio openen
+# zodat de pathway kan worden bekeken.
+# ============================================================
+
+install.packages("png")
+library(png)
+
+img <- readPNG("hsa05323.pathview.png")
+
+plot.new()
+
+rasterImage(
+  img,
+  0, 0, 1, 1
+)
+
+library(grid)
 
 img <- readPNG("hsa05323.pathview.png")
 
 grid.raster(img)
 
+
+# ============================================================
+# 37. IL-17 signaling pathway bekijken
+# Doel: de IL-17-signaleringsroute visualiseren omdat deze
+# pathway betrokken is bij de ontstekingsprocessen die uit
+# de enrichmentanalyse naar voren kwamen.
+# ============================================================
+
 img <- readPNG("hsa04657.pathview.png")
 
-grid.raster(img)
+plot.new()
+
+rasterImage(
+  img,
+  0, 0, 1, 1
+)
+
+
+# ============================================================
+# 38. TNF signaling pathway bekijken
+# Doel: de TNF-signaleringsroute visualiseren vanwege de
+# betrokkenheid van TNF bij ontstekingsprocessen in RA.
+# ============================================================
 
 img <- readPNG("hsa04668.pathview.png")
 
-grid.raster(img)
+plot.new()
 
+rasterImage(
+  img,
+  0, 0, 1, 1
+)
+
+
+# ============================================================
+# 39. Up- en downregulated genen afzonderlijk selecteren
+# Doel: genen opdelen in significant verhoogd en significant
+# verlaagd tot expressie gebrachte genen.
+#
+# Criteria:
+# - padj < 0.05
+# - log2FoldChange > 1 voor upregulated
+# - log2FoldChange < -1 voor downregulated
+# ============================================================
 
 up_genes <- rownames(
   resultaten[
     !is.na(resultaten$padj) &
       !is.na(resultaten$log2FoldChange) &
       resultaten$padj < 0.05 &
-      resultaten$log2FoldChange > 1, ])
-
+      resultaten$log2FoldChange > 1,
+  ]
+)
 
 down_genes <- rownames(
   resultaten[
     !is.na(resultaten$padj) &
       !is.na(resultaten$log2FoldChange) &
-      resultaten$padj < 0.05 & 
-      resultaten$log2FoldChange < -1,])
+      resultaten$padj < 0.05 &
+      resultaten$log2FoldChange < -1,
+  ]
+)
 
 length(up_genes)
 length(down_genes)
+
+
+# ============================================================
+# 40. Definitieve DESeq2-resultaten opslaan
+# Doel: de volledige resultaten van de differentiële
+# genexpressieanalyse opslaan als CSV-bestand voor verdere
+# analyse en rapportage.
+# ============================================================
+
+write.csv(
+  as.data.frame(resultaten),
+  "DESeq2_resultaten.csv"
