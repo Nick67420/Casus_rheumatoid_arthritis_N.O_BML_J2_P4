@@ -1,12 +1,12 @@
 
 BiocManager::install("clusterProfiler")
 BiocManager::install("org.Hs.eg.db")
-BiocManager::install("enrichplot")
+BiocManager::install("enrichplot")  1.32.0 | https://bioconductor.org/packages/enrichplot
 
 library(clusterProfiler)
 library(org.Hs.eg.db)
-library(enrichplot)
-
+library(enrichplot)  1.32.0 | https://bioconductor.org/packages/enrichplot
+ 
 gene_symbols <- rownames(sig_genes)
 
 entrez <- bitr(
