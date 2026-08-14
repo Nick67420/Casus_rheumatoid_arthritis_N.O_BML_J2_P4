@@ -1,6 +1,6 @@
 sig <- resultaten[which(resultaten$padj < 0.05 & abs(resultaten$log2FoldChange) > 1), ]
 genes <- rownames(sig)
-library(enrichplot)
+library(enrichplot)  1.32.0 | https://bioconductor.org/packages/enrichplot
 
 go_bp <- enrichGO(
   gene = entrez$ENTREZID,
