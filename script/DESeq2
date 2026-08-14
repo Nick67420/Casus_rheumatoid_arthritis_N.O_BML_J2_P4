@@ -1,4 +1,4 @@
-library(DESeq2)
+library(DESeq2) 1.52.0 | https://bioconductor.org/packages/DESeq2
 
 treatment <- c(
   "Normal", "Normal", "Normal", "Normal",
