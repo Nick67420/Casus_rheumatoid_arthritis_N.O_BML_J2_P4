@@ -440,25 +440,53 @@ head(rownames(resultaten))
 
 
 # ============================================================
-# 19. Packages voor GO- en KEGG-enrichment installeren en laden
-# Doel: clusterProfiler gebruiken voor functionele enrichment-
-# analyses en org.Hs.eg.db gebruiken voor de annotatie van
-# humane genen.
+# 19. Packages voor GO-, KEGG- en pathway-analyse installeren
+# Doel: benodigde packages installeren en laden voor de
+# functionele enrichmentanalyses en pathwayvisualisatie.
+# clusterProfiler wordt gebruikt voor GO- en KEGG-enrichment.
+# org.Hs.eg.db bevat annotatiegegevens van humane genen.
+# enrichplot wordt gebruikt voor visualisatie van enrichment-
+# resultaten en pathview voor het visualiseren van genexpressie
+# op KEGG-pathways.
 # ============================================================
 
 BiocManager::install("clusterProfiler")
 BiocManager::install("org.Hs.eg.db")
 BiocManager::install("enrichplot")
+BiocManager::install("pathview")
 
 library(clusterProfiler)
 library(org.Hs.eg.db)
 library(enrichplot)
+library(pathview)
 
 
 # ============================================================
-# 20. Gen-symbolen omzetten naar Entrez-ID's
-# Doel: de gen-symbolen omzetten naar Entrez-ID's, omdat deze
-# ID's nodig zijn voor de KEGG-enrichmentanalyse.
+# 20. Significante genen selecteren
+# Doel: alleen genen selecteren die statistisch significant
+# verschillend tot expressie komen tussen RA en Normal.
+#
+# Voorwaarde:
+# padj < 0.05
+# ============================================================
+
+sig_genes <- resultaten[
+  !is.na(resultaten$padj) &
+    resultaten$padj < 0.05,
+]
+
+nrow(sig_genes)
+
+head(rownames(sig_genes))
+
+
+# ============================================================
+# 21. Gen-symbolen omzetten naar Entrez-ID's
+# Doel: de gen-symbolen uit de differentiële expressieanalyse
+# omzetten naar Entrez-ID's.
+#
+# Entrez-ID's worden gebruikt voor de GO- en KEGG-enrichment-
+# analyses.
 # ============================================================
 
 gene_symbols <- rownames(sig_genes)
@@ -474,65 +502,13 @@ head(entrez)
 
 
 # ============================================================
-# 21. KEGG-enrichmentanalyse
-# Doel: bepalen welke KEGG-signaalroutes statistisch verrijkt
-# zijn binnen de geselecteerde genen.
-# ============================================================
-
-kegg <- enrichKEGG(
-  gene = entrez$ENTREZID,
-  organism = "hsa",
-  pvalueCutoff = 0.05
-)
-
-head(kegg)
-
-
-# ============================================================
-# 22. KEGG-resultaten visualiseren
-# Doel: de belangrijkste verrijkte KEGG-pathways overzichtelijk
-# weergeven met een dotplot.
-# ============================================================
-
-dotplot(kegg)
-
-
-# ============================================================
-# 23. Meest interessante KEGG-pathways bekijken
-# Doel: de KEGG-resultaten omzetten naar een dataframe zodat
-# pathways kunnen worden gerangschikt en geselecteerd.
-# ============================================================
-
-kegg <- enrichKEGG(
-  gene = entrez$ENTREZID,
-  organism = "hsa",
-  pvalueCutoff = 0.05
-)
-
-as.data.frame(kegg)[1:20, ]
-
-
-# ============================================================
-# 24. GO-analyse: significante genen selecteren
-# Doel: een strengere selectie maken van genen die zowel
-# statistisch significant zijn als een relevante verandering
-# in expressie hebben.
-# ============================================================
-
-sig <- resultaten[
-  which(
-    resultaten$padj < 0.05 &
-      abs(resultaten$log2FoldChange) > 1
-  ),
-]
-
-genes <- rownames(sig)
-
-
-# ============================================================
-# 25. Gene Ontology enrichmentanalyse
-# Doel: onderzoeken welke biologische processen (Biological
-# Process) oververtegenwoordigd zijn in de geselecteerde genen.
+# 22. GO enrichmentanalyse
+# Doel: onderzoeken welke biologische processen
+# (Gene Ontology Biological Process) oververtegenwoordigd
+# zijn in de significant differentieel geëxprimeerde genen.
+#
+# De Benjamini-Hochberg methode wordt gebruikt om te corrigeren
+# voor multiple testing.
 # ============================================================
 
 go_bp <- enrichGO(
@@ -550,9 +526,9 @@ head(as.data.frame(go_bp))
 
 
 # ============================================================
-# 26. GO-resultaten bekijken en visualiseren
-# Doel: de GO-resultaten controleren en de belangrijkste
-# biologische processen visueel weergeven.
+# 23. GO-resultaten bekijken en visualiseren
+# Doel: de resultaten van de GO-analyse bekijken en de
+# belangrijkste biologische processen visualiseren.
 # ============================================================
 
 go_df <- as.data.frame(go_bp)
@@ -565,9 +541,9 @@ dotplot(go_bp, showCategory = 15)
 
 
 # ============================================================
-# 27. GO-resultaten opslaan
+# 24. GO-resultaten opslaan
 # Doel: de resultaten van de GO-analyse opslaan als CSV-bestand
-# zodat deze verder kunnen worden gebruikt en gerapporteerd.
+# voor verdere analyse en rapportage.
 # ============================================================
 
 write.csv(
@@ -578,7 +554,7 @@ write.csv(
 
 
 # ============================================================
-# 28. Belangrijkste GO-processen selecteren
+# 25. Belangrijkste biologische processen selecteren
 # Doel: de 20 meest significante biologische processen
 # selecteren op basis van de aangepaste p-waarde.
 # ============================================================
@@ -591,58 +567,37 @@ go_df[
 
 
 # ============================================================
-# 29. Genexpressieveranderingen voorbereiden voor Pathview
-# Doel: een vector maken met de log2 fold changes van de genen,
-# zodat deze later op KEGG-pathways kunnen worden geprojecteerd.
+# 26. KEGG enrichmentanalyse
+# Doel: onderzoeken welke KEGG-signaal- en metabole pathways
+# verrijkt zijn binnen de significant differentieel
+# geëxprimeerde genen.
+#
+# De analyse wordt uitgevoerd nadat de GO-analyse is uitgevoerd,
+# zodat eerst inzicht wordt verkregen in de biologische
+# processen die bij de differentiële genexpressie betrokken zijn.
 # ============================================================
 
-library(pathview)
-
-gene_fc <- resultaten$log2FoldChange
-names(gene_fc) <- rownames(resultaten)
-
-
-# ============================================================
-# 30. Gen-symbolen opnieuw omzetten naar Entrez-ID's
-# Doel: de genen koppelen aan Entrez-ID's die door Pathview
-# gebruikt kunnen worden.
-# ============================================================
-
-gene_df <- bitr(
-  rownames(resultaten),
-  fromType = "SYMBOL",
-  toType = "ENTREZID",
-  OrgDb = org.Hs.eg.db
+kegg <- enrichKEGG(
+  gene = entrez$ENTREZID,
+  organism = "hsa",
+  pvalueCutoff = 0.05
 )
 
-
-# ============================================================
-# 31. Log2 fold changes koppelen aan Entrez-ID's
-# Doel: voor ieder Entrez-ID de bijbehorende verandering in
-# genexpressie vastleggen.
-# ============================================================
-
-gene_df$logFC <- resultaten$log2FoldChange[
-  match(
-    gene_df$SYMBOL,
-    rownames(resultaten)
-  )
-]
+head(kegg)
 
 
 # ============================================================
-# 32. Vector voor Pathview maken
-# Doel: de log2 fold changes in het juiste formaat zetten
-# voor de pathwayvisualisatie.
+# 27. KEGG-resultaten visualiseren
+# Doel: de belangrijkste verrijkte KEGG-pathways overzichtelijk
+# weergeven met behulp van een dotplot.
 # ============================================================
 
-fc_vector <- gene_df$logFC
-names(fc_vector) <- gene_df$ENTREZID
+dotplot(kegg)
 
 
 # ============================================================
-# 33. Interessante KEGG-pathways selecteren
-# Doel: de KEGG-resultaten bekijken en de meest interessante
+# 28. Interessante KEGG-pathways selecteren
+# Doel: de KEGG-resultaten bekijken en de meest relevante
 # pathways selecteren voor verdere visualisatie.
 # ============================================================
 
@@ -658,14 +613,70 @@ head(
 
 
 # ============================================================
-# 34. Top 5 KEGG-pathways visualiseren met Pathview
-# Doel: de vijf geselecteerde KEGG-pathways visualiseren en
-# de veranderingen in genexpressie op de pathway weergeven.
+# 29. Genexpressieveranderingen voorbereiden voor Pathview
+# Doel: een vector maken met de log2 fold changes van alle
+# genen, zodat de veranderingen in genexpressie later op
+# KEGG-pathways kunnen worden geprojecteerd.
 # ============================================================
 
-kegg_df <- as.data.frame(kegg)
+gene_fc <- resultaten$log2FoldChange
+names(gene_fc) <- rownames(resultaten)
+
+
+# ============================================================
+# 30. Gen-symbolen omzetten naar Entrez-ID's voor Pathview
+# Doel: de genen uit de volledige DESeq2-resultaten koppelen
+# aan Entrez-ID's die door Pathview gebruikt kunnen worden.
+# ============================================================
+
+gene_df <- bitr(
+  rownames(resultaten),
+  fromType = "SYMBOL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db
+)
+
+
+# ============================================================
+# 31. Log2 fold changes koppelen aan Entrez-ID's
+# Doel: de log2 fold change van ieder gen koppelen aan het
+# bijbehorende Entrez-ID.
+# ============================================================
+
+gene_df$logFC <- resultaten$log2FoldChange[
+  match(
+    gene_df$SYMBOL,
+    rownames(resultaten)
+  )
+]
+
+
+# ============================================================
+# 32. Vector voor Pathview maken
+# Doel: de log2 fold changes in het juiste formaat zetten
+# zodat Pathview de veranderingen in genexpressie op de
+# KEGG-pathway kan weergeven.
+# ============================================================
+
+fc_vector <- gene_df$logFC
+names(fc_vector) <- gene_df$ENTREZID
+
+
+# ============================================================
+# 33. Top 5 KEGG-pathways selecteren
+# Doel: de vijf meest interessante/verrijkte KEGG-pathways
+# selecteren uit de resultaten voor verdere visualisatie.
+# ============================================================
 
 top_pathways <- kegg_df$ID[1:5]
+
+
+# ============================================================
+# 34. Top 5 KEGG-pathways visualiseren met Pathview
+# Doel: de geselecteerde KEGG-pathways visualiseren waarbij
+# de veranderingen in genexpressie op de pathway worden
+# weergegeven.
+# ============================================================
 
 for(pid in top_pathways) {
   pathview(
@@ -718,9 +729,9 @@ grid.raster(img)
 
 # ============================================================
 # 37. IL-17 signaling pathway bekijken
-# Doel: de IL-17-signaleringsroute visualiseren omdat deze
-# pathway betrokken is bij de ontstekingsprocessen die uit
-# de enrichmentanalyse naar voren kwamen.
+# Doel: de IL-17-signaleringsroute visualiseren vanwege de
+# betrokkenheid van deze pathway bij ontstekingsprocessen
+# binnen RA.
 # ============================================================
 
 img <- readPNG("hsa04657.pathview.png")
@@ -792,3 +803,4 @@ length(down_genes)
 write.csv(
   as.data.frame(resultaten),
   "DESeq2_resultaten.csv"
+)
