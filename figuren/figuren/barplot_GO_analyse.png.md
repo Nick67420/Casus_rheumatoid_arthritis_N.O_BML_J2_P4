@@ -1,1 +1,1 @@
-![barplotGO](../![barplot_GO_analyse.png)
+![barplotGO](../barplot_GO_analyse.png)
