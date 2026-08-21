@@ -139,13 +139,13 @@ bam_files <- c(
 
 
 # ============================================================
-# 6. Reads per gen tellen
+# 6. Reads per gen tellen met featureCounts
 # Doel: bepalen hoeveel sequencing reads aan ieder gen gekoppeld
-# kunnen worden. Dit vormt de countmatrix die als input wordt
-# gebruikt voor de differentiële genexpressieanalyse.
+# kunnen worden. De uitkomst wordt opgeslagen in count_matrix.
 #
-# Bijzonderheid: de GTF-file bevat de annotatie van de genen.
-# Omdat de data paired-end zijn, wordt isPairedEnd = TRUE gebruikt.
+# Bijzonderheid: de data zijn paired-end, daarom wordt
+# isPairedEnd = TRUE gebruikt. De GTF-file bevat de
+# genannotaties.
 # ============================================================
 
 count_matrix <- featureCounts(
@@ -159,19 +159,26 @@ count_matrix <- featureCounts(
 
 
 # ============================================================
-# 7. Countmatrix controleren en voorbereiden
-# Doel: controleren of de countdata correct zijn ingelezen en
-# de matrix geschikt maken voor DESeq2.
+# 7. Countmatrix uit featureCounts halen
+# Doel: alleen de daadwerkelijke countmatrix uit het resultaat
+# van featureCounts halen. Deze matrix wordt gebruikt als input
+# voor DESeq2.
 # ============================================================
 
-counts <- read.table("count_matrix_RA.txt")
-str(count_matrix)
+counts <- count_matrix$counts
 
-counts <- "count_matrix_RA.txt"
+# Controleren hoeveel genen en samples aanwezig zijn.
+dim(counts)
+
+# Controleren of de countmatrix correct is ingelezen.
 head(counts)
 
-counts <- count_matrix$counts
-dim(counts)
+
+# ============================================================
+# 8. Kolomnamen van de countmatrix aanpassen
+# Doel: de samples duidelijke namen geven die later ook gebruikt
+# worden in de treatment_table.
+# ============================================================
 
 colnames(counts) <- c(
   "RA1_sorted",
@@ -184,18 +191,12 @@ colnames(counts) <- c(
   "RA8_sorted"
 )
 
-head(counts)
-
-read.table("count_matrix_RA.txt")
-
-counts <- count_matrix$counts
-head(counts)
-
-counts <- read.table("count_matrix_RA.txt", row.names = 1)
+# Controleren of de kolomnamen correct zijn.
+colnames(counts)
 
 
 # ============================================================
-# 8. Packages voor differentiële expressie en visualisatie
+# 9. Packages voor differentiële genexpressie en visualisatie
 # Doel: benodigde packages installeren en laden voor DESeq2,
 # KEGG/pathway-analyse en visualisatie.
 # ============================================================
@@ -212,12 +213,12 @@ library(pathview)
 
 
 # ============================================================
-# 9. Experimentele groepen definiëren
+# 10. Experimentele groepen definiëren
 # Doel: aangeven welke samples tot de controlegroep en welke
 # samples tot de RA-groep behoren.
 #
-# De namen in treatment_table moeten exact overeenkomen met
-# de kolomnamen van de countmatrix.
+# De rijnamen van treatment_table moeten overeenkomen met de
+# kolomnamen van de countmatrix.
 # ============================================================
 
 treatment <- c(
@@ -227,55 +228,22 @@ treatment <- c(
 
 treatment_table <- data.frame(treatment)
 
-rownames(treatment_table) <- c(
-  "RA1_sorted",
-  "RA2_sorted",
-  "RA3_sorted",
-  "RA4_sorted",
-  "RA5_sorted",
-  "RA6_sorted",
-  "RA7_sorted",
-  "RA8_sorted"
-)
-
 rownames(treatment_table) <- colnames(counts)
 
 
 # ============================================================
-# 10. DESeq2-dataset maken
+# 11. DESeq2-dataset maken
 # Doel: de countmatrix en experimentele informatie combineren
 # tot een DESeqDataSet.
 #
-# Het design bepaalt dat de behandeling/groep wordt gebruikt
-# om verschillen in genexpressie te onderzoeken.
+# Het design (~ treatment) geeft aan dat de groepen Normal en RA
+# met elkaar worden vergeleken.
 # ============================================================
 
 dds <- DESeqDataSetFromMatrix(
   countData = counts,
   colData = treatment_table,
   design = ~ treatment
-)
-
-
-# ============================================================
-# 11. Differentiële genexpressieanalyse uitvoeren
-# Doel: bepalen welke genen significant verschillend tot
-# expressie komen tussen RA en Normal.
-#
-# DESeq() voert de statistische analyse uit.
-# results() haalt vervolgens de resultaten op, waaronder
-# log2FoldChange, p-waarde en aangepaste p-waarde.
-# ============================================================
-
-dds <- DESeq(dds)
-
-resultaten <- results(dds)
-
-write.table(
-  resultaten,
-  file = 'ResultatenWC3.csv',
-  row.names = TRUE,
-  col.names = TRUE
 )
 
 head(resultaten)
