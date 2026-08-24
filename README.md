@@ -1,4 +1,4 @@
-#Transcriptomische analyse van differentiële genexpressie en biologische signaalroutes bij reumatoïde artritis met behulp van RNA-sequencing
+# Transcriptomische analyse van differentiële genexpressie en biologische signaalroutes bij reumatoïde artritis met behulp van RNA-sequencing
 
 ## Inleiding/aanleiding
 Reumatoïde artritis (RA) is een veelvoorkomende chronische auto-immuunziekte die wordt gekenmerkt door ontstekingen van de gewrichten. De ziekte veroorzaakt pijn, stijfheid en verminderde mobiliteit, waardoor de kwaliteit van leven aanzienlijk kan afnemen. Ondanks de beschikbaarheid van ontstekingsremmende behandelingen is RA niet te genezen en reageert niet iedere patiënt hetzelfde op therapieën. Meer inzicht in de moleculaire mechanismen achter RA kan bijdragen aan een beter begrip van de ziekte en de ontwikkeling van nieuwe behandelingen.
