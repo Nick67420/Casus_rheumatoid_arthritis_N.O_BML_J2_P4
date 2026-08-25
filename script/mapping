@@ -1,11 +1,20 @@
-library(Rsubread) 2.26.0 | https://bioconductor.org/packages/Rsubread 
+# Rsubread laden voor het alignen van RNA-sequencing reads
+library(Rsubread)  # versie 2.26.0
+
+# Een index maken van het humane referentiegenoom (GRCh38.p14)
+# Hierdoor kunnen de sequencing reads later efficiënt aan het genoom worden gekoppeld
 buildindex(
-  basename = "ref_human",
-  reference = "GCF_000001405.40_GRCh38.p14_genomic.fna",
-  memory = 4000,
-  indexSplit = TRUE)
+  basename = "ref_human",  # Naam van de genome-index
+  reference = "GCF_000001405.40_GRCh38.p14_genomic.fna",  # Referentiegenoom
+  memory = 4000,  # Maximaal 4000 MB geheugen gebruiken
+  indexSplit = TRUE  # Genoom opsplitsen bij het maken van de index
+)
+
+# De RNA-sequencing reads alignen tegen het humane referentiegenoom
+# R1 en R2 zijn de twee reads van paired-end sequencing
 align(
-  index = "ref_human",
-  readfile1 = "sample_R1.fastq",
-  readfile2 = "sample_R2.fastq",
-  output_file = "sample.BAM")
+  index = "ref_human",  # Gebruik de gemaakte genome-index
+  readfile1 = "sample_R1.fastq",  # Eerste read-bestand
+  readfile2 = "sample_R2.fastq",  # Tweede read-bestand
+  output_file = "sample.BAM"  # Resultaat opslaan als BAM-bestand
+)
