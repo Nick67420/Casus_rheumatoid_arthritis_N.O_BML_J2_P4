@@ -34,7 +34,8 @@ Een belangrijke beperking van dit onderzoek is het kleine aantal monsters en het
 
 # algemene informatie github:
 
-zie [bronnen](/bronnen)
+zie hier de [bronnen](/bronnen)
 
-zie [
+zie hier de [data stewardship](competenties/data_stewardship.md)
 
+zie hier de 
