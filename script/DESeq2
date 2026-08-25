@@ -1,11 +1,22 @@
-library(DESeq2) 1.52.0 | https://bioconductor.org/packages/DESeq2
+# DESeq2 laden voor differentiële genexpressieanalyse
+library(DESeq2)  # versie 1.52.0
 
+
+# Aangeven tot welke experimentele groep ieder sample behoort
+# De eerste vier samples zijn gezonde controles (Normal)
+# De laatste vier samples zijn patiënten met reumatoïde artritis (RA)
 treatment <- c(
   "Normal", "Normal", "Normal", "Normal",
-  "RA", "RA", "RA", "RA")
+  "RA", "RA", "RA", "RA"
+)
 
+
+# Een tabel maken waarin de behandeling/groep van ieder sample staat
 treatment_table <- data.frame(treatment)
 
+
+# De namen van de samples instellen
+# Deze moeten overeenkomen met de kolomnamen van de count matrix
 rownames(treatment_table) <- c(
   "RA1_sorted",
   "RA2_sorted",
@@ -14,17 +25,30 @@ rownames(treatment_table) <- c(
   "RA5_sorted",
   "RA6_sorted",
   "RA7_sorted",
-  "RA8_sorted")
+  "RA8_sorted"
+)
 
+
+# Een DESeqDataSet maken
+# Hierbij worden de read counts gekoppeld aan de experimentele groepen
 dds <- DESeqDataSetFromMatrix(
-  countData = counts,
-  colData = treatment_table,
-  design = ~ treatment)
+  countData = counts,             # Count matrix van featureCounts
+  colData = treatment_table,     # Informatie over de experimentele groepen
+  design = ~ treatment            # Vergelijking tussen Normal en RA
+)
 
+
+# De differentiële expressieanalyse uitvoeren
 dds <- DESeq(dds)
 
+
+# De resultaten van de vergelijking ophalen
+# Hierbij wordt RA vergeleken met Normal
 resultaten <- results(dds)
 
+
+# Alleen genen selecteren met een significante aangepaste p-waarde
+# padj < 0.05 betekent dat het gen statistisch significant verschilt
 sig_genes <- resultaten[
   !is.na(resultaten$padj) &
   resultaten$padj < 0.05,
