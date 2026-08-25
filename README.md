@@ -3,7 +3,7 @@
 ## Inleiding/aanleiding
 Reumatoïde artritis (RA) is een veelvoorkomende chronische auto-immuunziekte die wordt gekenmerkt door ontstekingen van de gewrichten. De ziekte veroorzaakt pijn, stijfheid en verminderde mobiliteit, waardoor de kwaliteit van leven aanzienlijk kan afnemen. Ondanks de beschikbaarheid van ontstekingsremmende behandelingen is RA niet te genezen en reageert niet iedere patiënt hetzelfde op therapieën. Meer inzicht in de moleculaire mechanismen achter RA kan bijdragen aan een beter begrip van de ziekte en de ontwikkeling van nieuwe behandelingen.
 Bij RA valt het immuunsysteem het gewrichtsslijmvlies aan, waardoor een chronische ontstekingsreactie ontstaat. Hierbij worden verschillende immuuncellen geactiveerd die ontstekingsbevorderende cytokinen, zoals TNF-α, IL-6, IL-1β en IL-17, produceren (Brennan & McInnes, 2008). Langdurige ontsteking kan leiden tot beschadiging van kraakbeen en bot (Bustamante et al., 2017). Hoewel genetische aanleg en omgevingsfactoren, zoals roken, een belangrijke rol spelen, is de exacte oorzaak van RA nog niet volledig bekend.
-Bij RA verandert het patroon van genexpressie ten opzichte van gezonde individuen (Carr et al., 2020). In dit onderzoek werden daarom de verschillen in genexpressie tussen RA-patiënten en gezonde controles onderzocht met behulp van RNA-sequencing, gevolgd door differentiële genexpressieanalyse (DESeq2) en functionele GO- en KEGG-analyses om betrokken genen en biologische signaalroutes te identificeren. zie [bronnen](/bronnen)
+Bij RA verandert het patroon van genexpressie ten opzichte van gezonde individuen (Carr et al., 2020). In dit onderzoek werden daarom de verschillen in genexpressie tussen RA-patiënten en gezonde controles onderzocht met behulp van RNA-sequencing, gevolgd door differentiële genexpressieanalyse (DESeq2) en functionele GO- en KEGG-analyses om betrokken genen en biologische signaalroutes te identificeren. 
 
 
 ## Methode
@@ -31,3 +31,10 @@ De DESeq2-analyse liet zien dat er verschillen in genexpressie aanwezig waren tu
 Op basis van deze resultaten kan worden geconcludeerd dat de gevonden verschillen in genexpressie vooral wijzen op veranderingen in immuun- en ontstekingsgerelateerde processen bij RA. Hiermee wordt de onderzoeksvraag beantwoord, waarbij de resultaten laten zien dat meerdere biologische processen en signaalroutes betrokken zijn bij de verschillen tussen RA-patiënten en gezonde controles.
 
 Een belangrijke beperking van dit onderzoek is het kleine aantal monsters en het gebruik van een subset van de beschikbare sequencing reads. Hierdoor kunnen de resultaten niet direct worden gegeneraliseerd naar alle RA-patiënten. Vervolgonderzoek met een grotere patiëntengroep en volledige sequencingdatasets kan helpen om de gevonden verschillen verder te bevestigen en mogelijk relevante biomarkers voor RA te identificeren.
+
+# algemene informatie github:
+
+zie [bronnen](/bronnen)
+
+zie [
+
