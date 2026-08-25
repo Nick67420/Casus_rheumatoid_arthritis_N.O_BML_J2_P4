@@ -1,8 +1,21 @@
-library(Rsamtools) 2.28.0 | https://bioconductor.org/packages/Rsamtools 
-library(Rsubread) 2.26.0 | https://bioconductor.org/packages/Rsubread 
+# Rsamtools laden voor het verwerken en beheren van BAM-bestanden
+library(Rsamtools)  # versie 2.28.0
+
+# Rsubread laden voor het verwerken van sequencing data
+library(Rsubread)  # versie 2.26.0
+
+
+# Het BAM-bestand sorteren op basis van de positie op het referentiegenoom
+# Dit maakt het bestand geschikt voor verdere verwerking
 sortBam(
-  file = "sample.BAM",
-  destination = "sample.sorted")
-  indexBam (file = "sample.sorted.bam")
+  file = "sample.BAM",              # Oorspronkelijke BAM-file
+  destination = "sample.sorted"     # Naam van het gesorteerde BAM-bestand
+)
+
+# Een index maken van het gesorteerde BAM-bestand
+# Hierdoor kan R snel specifieke locaties in het BAM-bestand terugvinden
+indexBam(
+  file = "sample.sorted.bam"        # Gesorteerde BAM-file
+)
 
  
