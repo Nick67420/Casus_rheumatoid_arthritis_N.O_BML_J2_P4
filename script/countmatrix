@@ -1,10 +1,20 @@
- featureCounts(
-  files = "sample.sorted.bam",
-  annot.ext = "genomic.gtf",
-  isPairedEnd = TRUE,
-  isGTFAnnotationFile = TRUE,
-  GTF.attrType = "gene_id",
-  useMetaFeatures = TRUE)
+# Reads tellen per gen met featureCounts
+# Hiermee wordt bepaald hoeveel sequencing reads bij ieder gen horen
+count_matrix <- featureCounts(
+  files = "sample.sorted.bam",       # Gesorteerde BAM-file
+  annot.ext = "genomic.gtf",         # GTF-bestand met de genannotaties
+  isPairedEnd = TRUE,                # De sequencing is paired-end
+  isGTFAnnotationFile = TRUE,        # De annotatie is een GTF-bestand
+  GTF.attrType = "gene_id",          # Genen identificeren op basis van gene_id
+  useMetaFeatures = TRUE              # Reads worden per gen (meta-feature) geteld
+)
+
+# Alleen de daadwerkelijke read counts uit de resultaten halen
 counts <- count_matrix$counts
+
+# De afmetingen van de count matrix bekijken
+# Geeft het aantal genen (rijen) en samples (kolommen)
 dim(counts)
+
+# De eerste rijen van de count matrix bekijken
 head(counts)
