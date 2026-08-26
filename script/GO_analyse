@@ -1,6 +1,55 @@
-sig <- resultaten[which(resultaten$padj < 0.05 & abs(resultaten$log2FoldChange) > 1), ]
+# ============================================================
+# 1. Significante genen selecteren
+# Doel: een selectie maken van genen die zowel statistisch
+# significant verschillend tot expressie komen als een
+# relevante verandering in expressie laten zien.
+#
+# Voorwaarden:
+# - aangepaste p-waarde (padj) < 0.05
+# - absolute log2 fold change > 1
+#
+# Hierdoor worden zowel sterk verhoogde als sterk verlaagde
+# genen geselecteerd.
+# ============================================================
+
+sig <- resultaten[
+  which(
+    resultaten$padj < 0.05 &
+    abs(resultaten$log2FoldChange) > 1
+  ),
+]
+
+# Haal de gen-symbolen van de geselecteerde genen op.
 genes <- rownames(sig)
-library(enrichplot)  1.32.0 | https://bioconductor.org/packages/enrichplot
+
+
+# ============================================================
+# 2. enrichplot laden
+# Doel: het package enrichplot laden voor het bekijken en
+# visualiseren van enrichmentresultaten.
+# ============================================================
+
+library(enrichplot)  # versie 1.32.0
+
+
+# ============================================================
+# 3. Gene Ontology enrichmentanalyse
+# Doel: onderzoeken welke Gene Ontology (GO) Biological
+# Processes oververtegenwoordigd zijn binnen de geselecteerde
+# genen.
+#
+# De analyse gebruikt Entrez-ID's en de humane genannotatie
+# uit org.Hs.eg.db.
+#
+# Parameters:
+# - ont = "BP": alleen Biological Process wordt onderzocht.
+# - pAdjustMethod = "BH": correctie voor multiple testing
+#   met de Benjamini-Hochberg-methode.
+# - pvalueCutoff = 0.05: maximale p-waarde voor selectie.
+# - qvalueCutoff = 0.05: maximale q-waarde voor selectie.
+# - readable = TRUE: Entrez-ID's worden waar mogelijk
+#   terugvertaald naar gen-symbolen.
+# ============================================================
 
 go_bp <- enrichGO(
   gene = entrez$ENTREZID,
@@ -12,9 +61,33 @@ go_bp <- enrichGO(
   qvalueCutoff = 0.05,
   readable = TRUE
 )
+
+
+# ============================================================
+# 4. Eerste controle van de GO-resultaten
+# Doel: controleren of de GO-enrichmentanalyse resultaten
+# heeft opgeleverd en de eerste resultaten bekijken.
+# ============================================================
+
 head(as.data.frame(go_bp))
+
+
+# ============================================================
+# 5. GO-resultaten omzetten naar een dataframe
+# Doel: de resultaten omzetten naar een dataframe zodat de
+# verschillende GO-processen en bijbehorende statistieken
+# eenvoudig kunnen worden bekeken en verder verwerkt.
+# ============================================================
 
 go_df <- as.data.frame(go_bp)
 
+
+# ============================================================
+# 6. Omvang en inhoud van de GO-resultaten controleren
+# Doel: controleren hoeveel GO-termen zijn gevonden en de
+# eerste 20 resultaten bekijken.
+# ============================================================
+
 dim(go_df)
+
 head(go_df, 20)
