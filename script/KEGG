@@ -1,13 +1,57 @@
+# ============================================================
+# 1. Benodigde packages installeren
+# Doel: de packages installeren die nodig zijn voor het
+# omzetten van gen-ID's, de KEGG-enrichmentanalyse en
+# de visualisatie van de resultaten.
+#
+# Versies:
+# - clusterProfiler: 4.20.0
+# - org.Hs.eg.db: 3.23.1
+# - enrichplot: 1.32.0
+# ============================================================
 
-BiocManager::install("clusterProfiler")  4.20.0 | https://bioconductor.org/packages/clusterProfiler
-BiocManager::install("org.Hs.eg.db") 3.23.1 | https://bioconductor.org/packages/org.Hs.eg.db
-BiocManager::install("enrichplot")  1.32.0 | https://bioconductor.org/packages/enrichplot
+BiocManager::install("clusterProfiler")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("enrichplot")
 
-library(clusterProfiler)  4.20.0 | https://bioconductor.org/packages/clusterProfiler
-library(org.Hs.eg.db) 3.23.1 | https://bioconductor.org/packages/org.Hs.eg.db
-library(enrichplot)  1.32.0 | https://bioconductor.org/packages/enrichplot
- 
+
+# ============================================================
+# 2. Packages laden
+# Doel: de geïnstalleerde packages beschikbaar maken in R.
+# clusterProfiler wordt gebruikt voor de enrichmentanalyse,
+# org.Hs.eg.db voor humane genannotatie en enrichplot voor
+# de visualisatie van enrichmentresultaten.
+# ============================================================
+
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+
+
+# ============================================================
+# 3. Gen-symbolen selecteren
+# Doel: de gen-symbolen ophalen van de eerder geselecteerde
+# significante genen.
+#
+# Deze genen worden gebruikt als input voor de KEGG-
+# enrichmentanalyse.
+# ============================================================
+
 gene_symbols <- rownames(sig_genes)
+
+
+# ============================================================
+# 4. Gen-symbolen omzetten naar Entrez-ID's
+# Doel: de gen-symbolen omzetten naar Entrez-ID's.
+#
+# KEGG gebruikt Entrez-ID's om genen aan pathways te koppelen.
+# org.Hs.eg.db wordt gebruikt als annotatiedatabase voor
+# humane genen.
+#
+# Alleen genen waarvoor een geldige omzetting naar een
+# Entrez-ID beschikbaar is, kunnen worden meegenomen in
+# de KEGG-analyse.
+# ============================================================
 
 entrez <- bitr(
   gene_symbols,
@@ -16,7 +60,21 @@ entrez <- bitr(
   OrgDb = org.Hs.eg.db
 )
 
+
+# Controleer de eerste geconverteerde genen.
 head(entrez)
+
+
+# ============================================================
+# 5. KEGG-enrichmentanalyse uitvoeren
+# Doel: onderzoeken welke KEGG-pathways statistisch
+# oververtegenwoordigd zijn binnen de geselecteerde
+# genen.
+#
+# organism = "hsa" geeft aan dat het om Homo sapiens gaat.
+# pvalueCutoff = 0.05 bepaalt de grens voor de p-waarde
+# waarmee pathways als significant worden beschouwd.
+# ============================================================
 
 kegg <- enrichKEGG(
   gene = entrez$ENTREZID,
@@ -24,16 +82,37 @@ kegg <- enrichKEGG(
   pvalueCutoff = 0.05
 )
 
+
+# Controleer de eerste KEGG-resultaten.
 head(kegg)
+
+
+# ============================================================
+# 6. KEGG-resultaten visualiseren
+# Doel: de verrijkte KEGG-pathways overzichtelijk weergeven
+# met een dotplot.
+#
+# De dotplot maakt het mogelijk om onder andere de
+# significantie, genratio en het aantal betrokken genen
+# per pathway te vergelijken.
+# ============================================================
 
 dotplot(kegg)
 
-#interesante genen van KEGG
+
+# ============================================================
+# 7. Interessante KEGG-pathways selecteren
+# Doel: de KEGG-resultaten omzetten naar een dataframe zodat
+# de gevonden pathways en bijbehorende statistieken verder
+# kunnen worden bekeken en geselecteerd.
+# ============================================================
 
 kegg <- enrichKEGG(
   gene = entrez$ENTREZID,
   organism = "hsa",
   pvalueCutoff = 0.05
 )
+
+as.data.frame(kegg)[1:20, ]
 
 as.data.frame(kegg)[1:20, ]
