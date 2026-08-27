@@ -64,25 +64,26 @@ GitHub wordt voornamelijk gebruikt voor versiebeheer en het beschikbaar maken va
 Voor de verwerking en analyse van de RNA-sequencingdata zijn verschillende bio-informatica-tools en R-packages gebruikt.
 
 Tool/package	Toepassing
-R / RStudio	Uitvoeren van de data-analyse en scripts
 
-Rsubread	Mappen van reads en uitvoeren van featureCounts
+**R / RStudio**:	Uitvoeren van de data-analyse en scripts
 
-Rsamtools	Sorteren en indexeren van BAM-bestanden
+**Rsubread**:	Mappen van reads en uitvoeren van featureCounts
 
-DESeq2	Differentiële genexpressieanalyse
+**Rsamtools**:	Sorteren en indexeren van BAM-bestanden
 
-clusterProfiler	GO- en KEGG-enrichmentanalyses
+**DESeq2**:	Differentiële genexpressieanalyse
 
-org.Hs.eg.db	Annotatie en omzetting van humane gen-ID's
+**clusterProfiler**:	GO- en KEGG-enrichmentanalyses
 
-enrichplot	Visualisatie van enrichmentresultaten
+**org.Hs.eg.db**;	Annotatie en omzetting van humane gen-ID's
 
-EnhancedVolcano	Maken van volcano plots
+**enrichplot**;	Visualisatie van enrichmentresultaten
 
-Pathview	Visualiseren van genexpressie op KEGG-pathways
+**EnhancedVolcano**:	Maken van volcano plots
 
-Git / GitHub	Versiebeheer en delen van scripts en documentatie
+**Pathview**:	Visualiseren van genexpressie op KEGG-pathways
+
+**Git / GitHub**:	Versiebeheer en delen van scripts en documentatie
 
 Tijdens het onderzoek zijn verschillende bestandsformaten gebruikt. FASTQ-bestanden bevatten de oorspronkelijke sequencing reads, BAM-bestanden bevatten de gemapte reads en CSV-bestanden worden gebruikt voor tabellen en analyse-uitvoer. PNG-bestanden worden gebruikt voor figuren en pathway-visualisaties.
 
