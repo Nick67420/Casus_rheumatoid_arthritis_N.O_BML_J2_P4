@@ -65,14 +65,23 @@ Voor de verwerking en analyse van de RNA-sequencingdata zijn verschillende bio-i
 
 Tool/package	Toepassing
 R / RStudio	Uitvoeren van de data-analyse en scripts
+
 Rsubread	Mappen van reads en uitvoeren van featureCounts
+
 Rsamtools	Sorteren en indexeren van BAM-bestanden
+
 DESeq2	Differentiële genexpressieanalyse
+
 clusterProfiler	GO- en KEGG-enrichmentanalyses
+
 org.Hs.eg.db	Annotatie en omzetting van humane gen-ID's
+
 enrichplot	Visualisatie van enrichmentresultaten
+
 EnhancedVolcano	Maken van volcano plots
+
 Pathview	Visualiseren van genexpressie op KEGG-pathways
+
 Git / GitHub	Versiebeheer en delen van scripts en documentatie
 
 Tijdens het onderzoek zijn verschillende bestandsformaten gebruikt. FASTQ-bestanden bevatten de oorspronkelijke sequencing reads, BAM-bestanden bevatten de gemapte reads en CSV-bestanden worden gebruikt voor tabellen en analyse-uitvoer. PNG-bestanden worden gebruikt voor figuren en pathway-visualisaties.
