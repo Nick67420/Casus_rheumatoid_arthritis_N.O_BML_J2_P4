@@ -9,12 +9,17 @@ Een duidelijke mappenstructuur zorgt ervoor dat bestanden gemakkelijk terug te v
 
 De repository bevat onder andere de volgende mappen:
 
-data/ – bevat de gebruikte RNA-sequencingdata en de verwerkte data die tijdens de analyse zijn verkregen.
-scripts/ – bevat het volledige R-script waarmee de RNA-sequencingdata zijn verwerkt en geanalyseerd. Daarnaast zijn de verschillende analysemethoden, zoals mapping, DESeq2, GO- en KEGG-analyse, afzonderlijk gedocumenteerd.
-figuren/ – bevat de figuren die tijdens de analyse zijn gemaakt, waaronder de volcano plot, GO- en KEGG-resultaten en de gegenereerde pathway-visualisaties.
-tabellen/ – bevat de tabellen met resultaten uit de analyses.
-bronnen/ – bevat de gebruikte wetenschappelijke bronnen en de AI-disclaimer.
-competenties/ – bevat de uitgewerkte competenties en de bijbehorende documentatie over databeheer.
+**data/** – bevat de gebruikte RNA-sequencingdata en de verwerkte data die tijdens de analyse zijn verkregen.
+
+**scripts/ **– bevat het volledige R-script waarmee de RNA-sequencingdata zijn verwerkt en geanalyseerd. Daarnaast zijn de verschillende analysemethoden, zoals mapping, DESeq2, GO- en KEGG-analyse, afzonderlijk gedocumenteerd.
+
+**figuren/** – bevat de figuren die tijdens de analyse zijn gemaakt, waaronder de volcano plot, GO- en KEGG-resultaten en de gegenereerde pathway-visualisaties.
+
+**tabellen/** – bevat de tabellen met resultaten uit de analyses.
+
+**bronnen/** – bevat de gebruikte wetenschappelijke bronnen en de AI-disclaimer.
+
+**competenties/** – bevat de uitgewerkte competenties en de bijbehorende documentatie over databeheer.
 
 Door de bestanden op deze manier te organiseren, zijn ruwe data, scripts, resultaten en documentatie van elkaar gescheiden. Hierdoor kunnen de verschillende stappen van het onderzoek gemakkelijker worden teruggevonden en gecontroleerd. De resultaten en figuren zijn vanuit de README via hyperlinks toegankelijk gemaakt, zodat de gebruiker direct naar de betreffende bestanden kan navigeren.
 
