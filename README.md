@@ -38,4 +38,4 @@ zie hier de [bronnen](/bronnen) met AI disclaimer
 
 zie hier de [data stewardship](competenties/data_stewardship.md)
 
-zie hier de 
+zie hier de [beheersysteem](competenties/Beheersysteem_van_de_github.md)
