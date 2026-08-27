@@ -11,7 +11,7 @@ De repository bevat onder andere de volgende mappen:
 
 **data/** – bevat de gebruikte RNA-sequencingdata en de verwerkte data die tijdens de analyse zijn verkregen.
 
-**scripts/ **– bevat het volledige R-script waarmee de RNA-sequencingdata zijn verwerkt en geanalyseerd. Daarnaast zijn de verschillende analysemethoden, zoals mapping, DESeq2, GO- en KEGG-analyse, afzonderlijk gedocumenteerd.
+**scripts/ ** – bevat het volledige R-script waarmee de RNA-sequencingdata zijn verwerkt en geanalyseerd. Daarnaast zijn de verschillende analysemethoden, zoals mapping, DESeq2, GO- en KEGG-analyse, afzonderlijk gedocumenteerd.
 
 **figuren/** – bevat de figuren die tijdens de analyse zijn gemaakt, waaronder de volcano plot, GO- en KEGG-resultaten en de gegenereerde pathway-visualisaties.
 
