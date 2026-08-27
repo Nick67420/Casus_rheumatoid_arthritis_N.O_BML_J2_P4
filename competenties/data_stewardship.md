@@ -1,7 +1,7 @@
-Data Stewardship
-# Inleiding
+# Data Stewardship
+## Inleiding
 
-Data Stewardship omvat het zorgvuldig beheren, organiseren, opslaan en documenteren van onderzoeksgegevens gedurende de volledige onderzoeksperiode. Het doel hiervan is om gegevens betrouwbaar, reproduceerbaar en herbruikbaar te maken.
+Data Stewardship omvat het zorgvuldig verzamelen, beheren, opslaan, documenteren en beschikbaar stellen van onderzoeksgegevens gedurende een onderzoeksproject. Goed databeheer is belangrijk om onderzoeksresultaten betrouwbaar, controleerbaar en reproduceerbaar te maken. Binnen dit onderzoek naar reumatoïde artritis (RA) zijn verschillende soorten bestanden gebruikt, waaronder RNA-sequencingdata, R-scripts, tabellen en figuren. Een duidelijke organisatie van deze bestanden maakt het mogelijk om de uitgevoerde analyses terug te vinden en opnieuw uit te voeren.
 
 ## Structuur van de repository
 
