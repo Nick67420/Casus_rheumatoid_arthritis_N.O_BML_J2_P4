@@ -75,9 +75,9 @@ Tool/package	Toepassing
 
 **clusterProfiler**:	GO- en KEGG-enrichmentanalyses
 
-**org.Hs.eg.db**;	Annotatie en omzetting van humane gen-ID's
+**org.Hs.eg.db**:	Annotatie en omzetting van humane gen-ID's
 
-**enrichplot**;	Visualisatie van enrichmentresultaten
+**enrichplot**:	Visualisatie van enrichmentresultaten
 
 **EnhancedVolcano**:	Maken van volcano plots
 
