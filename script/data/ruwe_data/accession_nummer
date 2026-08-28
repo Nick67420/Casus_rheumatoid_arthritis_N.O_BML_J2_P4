@@ -1,5 +1,6 @@
 Gebruikte RNA-sequencing datasets
 
+
 | Sample | SRA accession nummer | Sequencing bestanden |
 |:---|:---:|:---|
 | RA1 | SRR4785819 | SRR4785819_1_subset40k.fastq en SRR4785819_2_subset40k.fastq |
