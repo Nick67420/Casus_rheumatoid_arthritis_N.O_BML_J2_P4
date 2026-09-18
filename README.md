@@ -12,7 +12,7 @@ Om de biologische betekenis van de differentieel tot expressie gebrachte genen t
 
 
 ![Flowchart](figuren/flowchart_materiaal_en_methode.png)
-flowchart methode, waarin alle stappen van de methode globaal zijn beschreven
+
 ## Resultaten
 Om genen te identificeren die verschillen in expressie tussen reumatoïde artritis (RA) patiënten en gezonde controles, werd een differentiële genexpressieanalyse met [DESeq2](tabellen/DESeq2_resultaten.csv) uitgevoerd op RNA-sequencingdata van vier RA-patiënten en vier gezonde controles. In totaal werden 25.579 genen geanalyseerd. Hiervan waren 3.275 genen significant verhoogd en 3.170 genen significant verlaagd in RA ten opzichte van de controlegroep (aangepaste p-waarde < 0,5). De [10 meest significant differentieel geëxprimeerde genen](tabellen/tabel1_top10_DE_genen.csv) tussen RA en gezonde controles werden gerangschikt op aangepaste p-waarde. De verschillen in genexpressie werden gevisualiseerd met behulp van een [volcano plot](figuren/figuren/1volcano_plot.png.md). Om de interpretatie van de volcano plot te ondersteunen, zijn CXCL8, MMP9, CCL2 en BAX geselecteerd voor afzonderlijke labeling op basis van hun biologische relevantie binnen ontstekings en ziekteprocessen die geassocieerd zijn met RA.
 
