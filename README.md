@@ -7,7 +7,7 @@ Bij RA verandert het patroon van genexpressie ten opzichte van gezonde individue
 
 
 ## Methode
-Voor deze studie werd gebruik gemaakt van een RNA-sequencing [dataset](script/data/ruwe_data) afkomstig van synoviumbiopten van vier patiënten met RA en vier gezonde controles (zie . De RNA-seq data bestond uit paired-end reads. deze werden geanalyseerd met behulp van de programmeertaal R. De ruwe sequencing reads werden gemapt op het Humane genoom: GCF_000001405.40_GRCh38.p14 met behulp van de Rsubread package (zie alle packages met referentie en versienummer [hier](/script/packages)) [mapping](script/mapping). Vervolgens werden de gemapte reads gesorteerd en geïndexeerd en werd met featureCounts het aantal reads per gen bepaald [sorteren en indexeren](script/sorteren). De gemaakte [countmatrix](script/countmatrix) werd gebruikt als input voor een differentiële genexpressieanalyse met behulp van de [DESeq2](script/DESeq2) package. Een gen werd als significant differentieel geëxprimeerd beschouwd wanneer de aangepaste p-waarde (padj) < 0,05 en de absolute log2 fold change (|log2FC|) > 1 was. Een |log2FC| > 1 komt overeen met een verschil van meer dan 2-voudig in genexpressie tussen de groepen.
+Voor deze studie werd gebruik gemaakt van een RNA-sequencing [dataset](script/data/ruwe_data) afkomstig van synoviumbiopten van vier patiënten met RA en vier gezonde controles (zie . De RNA-seq data bestond uit paired-end reads. deze werden geanalyseerd met behulp van de programmeertaal R. De ruwe sequencing reads werden gemapt op het Humane genoom: GCF_000001405.40_GRCh38.p14 met behulp van de Rsubread package [mapping](script/mapping). Vervolgens werden de gemapte reads gesorteerd en geïndexeerd en werd met featureCounts het aantal reads per gen bepaald [sorteren en indexeren](script/sorteren). De gemaakte [countmatrix](script/countmatrix) werd gebruikt als input voor een differentiële genexpressieanalyse met behulp van de [DESeq2](script/DESeq2) package. Een gen werd als significant differentieel geëxprimeerd beschouwd wanneer de aangepaste p-waarde (padj) < 0,05 en de absolute log2 fold change (|log2FC|) > 1 was. Een |log2FC| > 1 komt overeen met een verschil van meer dan 2-voudig in genexpressie tussen de groepen.
 Om de biologische betekenis van de differentieel tot expressie gebrachte genen te onderzoeken, werd een [GO enrichment analyse](script/GO_analyse) uitgevoerd om de betrokken biologische processen te identificeren. Daarna werd een [KEGG pathway analyse](script/KEGG) uitgevoerd om de metabole en signaalroutes in kaart te brengen. De resultaten van de KEGG-analyse werden verder gevisualiseerd met behulp van pathview, waarbij veranderingen in genexpressie werden geprojecteerd op relevante pathways. in de flowchart staan alle stappen overzichtelijk weergegeven in de volgorde waarin alles is uitgevoerd in Rstudio. Zie het volledige [script](/script/volledige_script) hier. 
 
 
@@ -37,6 +37,8 @@ Een belangrijke beperking van dit onderzoek is het kleine aantal monsters en het
 Zie hier de [bronnen](/bronnen) met AI disclaimer.
 
 Zie de [referenties](/bronnen/referenties_sequencing_data) van de sequencing data hier.
+
+Zie alle packages met referentie en versienummer [hier](/script/packages).
 
 Zie hier de [data stewardship](competenties/data_stewardship.md).
 
