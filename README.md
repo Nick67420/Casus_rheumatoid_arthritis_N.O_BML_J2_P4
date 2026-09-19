@@ -36,7 +36,7 @@ Een belangrijke beperking van dit onderzoek is het kleine aantal monsters en het
 
 Zie hier de [bronnen](/bronnen) met AI disclaimer.
 
-Zie de [referenties](/bronnen/referenties_sequencing_data) van de sequencing data) hier.
+Zie de [referenties](/bronnen/referenties_sequencing_data) van de sequencing data hier.
 
 Zie hier de [data stewardship](competenties/data_stewardship.md).
 
