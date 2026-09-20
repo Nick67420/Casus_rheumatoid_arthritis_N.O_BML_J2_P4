@@ -38,7 +38,7 @@ Zie hier de [bronnen](/bronnen) met AI disclaimer.
 
 Zie de [referenties](/bronnen/referenties_sequencing_data) van de sequencing data hier.
 
-Zie alle packages met referentie en versienummer [hier](/script/packages).
+Zie alle gebruikte packages met referentie en versienummer [hier](/script/packages).
 
 Zie hier de [data stewardship](competenties/data_stewardship.md).
 
